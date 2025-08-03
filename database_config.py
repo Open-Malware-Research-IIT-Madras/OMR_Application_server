@@ -18,7 +18,9 @@ def pushqueue(filehash, jobid):
   channel.queue_declare("queue_1")
   
   message = { 'File_Hash':filehash,
-               'Job_Id':jobid }
+               'Job_Id':jobid 
+               
+               }
   
   channel.basic_publish(exchange='',
                       routing_key='queue_1',

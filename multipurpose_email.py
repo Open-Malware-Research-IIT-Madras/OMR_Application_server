@@ -79,7 +79,7 @@ Your Job ID -- {jobid}
 Your Filehash -- {msg}
 -----------------------
 
-Your Download Link -- http://omr.iitm.ac.in/download/{msg}
+Your Download Link -- http://openmalwareresearch.in/download/{msg}
 
 -----------------------
 {send_to_name}, please note that you need to download your files within 1 week, 

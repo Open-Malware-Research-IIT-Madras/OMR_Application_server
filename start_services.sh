@@ -1,3 +1,4 @@
+
 #!/bin/bash 
 #run this script with sudo permissions only!!
 source ./bin/activate &

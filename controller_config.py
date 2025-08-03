@@ -64,7 +64,7 @@ def send_upload():
     return render_template("index.html")
 
 # ---------------------- FILE RECEIVE HANDLER ----------------------
-@app.route('/filesend/', methods=['POST'])
+@app.route('/filesend', methods=['POST'])
 def receive():
     print("The value of the path is", app.instance_path)
 
