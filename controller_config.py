@@ -11,20 +11,20 @@ username_list = []
 @app.route("/")
 def welcome():
     logger.info('Inside the welcome function at root')
-    session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=5)
+    return render_template("sign-in.html")
 
-    session['email'] = ''
-    session['actual_name'] = ''
-    session['oauth_token'] = ''
-
-    logger.info('Calling Oauth')
-    return redirect(url_for('login_google'))
 
 # ---------------------- GOOGLE LOGIN ----------------------
 @app.route("/login/google")
 def login_google():
     try:
+        session.permanent = True
+        app.permanent_session_lifetime = timedelta(minutes=30)
+        logger.info('Calling Oauth')
+        session['email'] = ''
+        session['actual_name'] = ''
+        session['oauth_token'] = ''
+
         redirect_uri = url_for('authorize_google', _external=True)
         return google.authorize_redirect(redirect_uri)
     except Exception as e:
@@ -59,9 +59,28 @@ def authorize_google():
     return redirect(url_for('send_upload'))
 
 # ---------------------- FILE UPLOAD PAGE ----------------------
-@app.route('/fileupload', methods=['GET'])
+@app.route('/your-dashboard', methods=['GET'])
 def send_upload():
-    return render_template("index.html")
+    return render_template("dashboard.html")
+
+# ---------------------- FILE SUBMISSION TABLE PAGE ----------------------
+@app.route('/submission-table', methods=['GET'])
+def submission_table():
+    
+    
+    
+    return render_template("tables.html")
+
+@app.route('/signout')
+def signout():
+    session.clear
+    return redirect('/')
+
+
+@app.route('/contact')
+def email_contact():
+    # This function is yet to be implemented 
+    pass 
 
 # ---------------------- FILE RECEIVE HANDLER ----------------------
 @app.route('/filesend', methods=['POST'])
