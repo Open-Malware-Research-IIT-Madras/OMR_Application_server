@@ -72,8 +72,7 @@ def submission_table():
     if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
         return redirect('/')
     
-    table_data=
-    
+    # table_data=
     
     logger.info('Inside the submission table function')
     return render_template("tables.html")
@@ -84,10 +83,10 @@ def signout():
     return redirect('/')
 
 
-@app.route('/contact')
-def email_contact():
-    # This function is yet to be implemented 
-    pass 
+# @app.route('/contact')
+# def email_contact():
+#     # This function is yet to be implemented 
+#     pass 
 
 # ---------------------- FILE RECEIVE HANDLER ----------------------
 @app.route('/filesend', methods=['POST'])

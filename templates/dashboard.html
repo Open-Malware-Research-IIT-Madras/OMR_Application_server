@@ -91,13 +91,7 @@
             <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Malware Upload</li>
           </ol>
         </nav>
-  
-        <!-- <div class="nav-item d-flex align-items-right">
-             
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-rCjJj7KVfZyqFZJNznjBADRAG-R5e3AtHcKdKuOtFcXLUWrGCKFnVtlUAYoAA7pfUhsJXQV4Oj1ayA17CakJwUglK0Lp0KPEOF60sKdOgQ" alt="Your Profile" style="border-radius: 50%; height: 40px; width:40px"> 
-                <h6 class="align-items-center"> Your account </h6>
-              
-        </div> -->
+
           </ul>
         </div>
       </div>
@@ -110,20 +104,20 @@
           <p class="mb-4">
             Upload your Malware sample in the form given below.  
           </p>
-             <form class="was-validated" action="#" method="POST" style="margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right:25% ">
+             <form class="was-validated" action="/filesend" method="POST" style="margin-top: 5%; margin-bottom: 5%; margin-left: 25%; margin-right:25% ">
                 <div style="padding-top: .5%; padding-bottom: .5%;" >
-                  <label for="validationTextarea" class="form-label" style="color: black;">Do you have any file comments?</label>
+                  <label for="validationTextarea" class="form-label" style="color: black;">Please add your file comments if any here</label>
                   <textarea class="form-control is-invalid" id="validationTextarea" placeholder=" Please enter your comments if any." style="width: 100%; height:100%"></textarea>
                   
                 </div>
 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
                   <label for="formFileLg" class="form-label" style="color: black;">Select your Malware file for upload</label>
-                  <input class="form-control form-control-lg" id="formFileLg" type="file">
+                  <input class="form-control form-control-lg" id="formFileLg" type="file" onchange="mime_type(event)">
                 </div>
 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
-                <input class="form-control" type="text" id="FileType" aria-label="" readonly>
+                <input class="form-control" type="text" id="FileType" value="" aria-label="" readonly>
                 </div>
                 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
@@ -169,6 +163,7 @@
       </div>
       <hr class="horizontal dark my-1">
       <div class="card-body pt-sm-3 pt-0">
+        <p>this is a sample paragraph</p>
         <!-- Sidebar Backgrounds -->
         
         </div>
@@ -432,36 +427,32 @@
   </script>
 
   <script>
-  const realFileElement = document.querySelector("#FileType");
-  async function handleChange(event) {
+  const readBuffer = require('buffer');
+  function mime_type(event){
+  const file_input_type = document.querySelector("file");
+  const realFileElement = document.querySelector("FileType");
+  console.log("We have entered the file upload js section");
   const file = event.target.files[0];
-  const buffers = await readBuffer(file, 0, 8);
-  const size= Math.round(file.size/1048576) // storing the file size in MB
+  const buffers = readBuffer(file, 0, 8);
+  const size= Math.round(file.size/1048576); // storing the file size in MB
   const uint8Array = new Uint8Array(buffers);
+  console.log(uint8Array);
   //Mime type declarations
-  const Windows_executable=[]
-  const Linux_executable=[]
-  const Android_executable=[]
+  const Linux_executable=[0x7F, 0x45, 0x4C, 0x46];
+  const Windows_executable=[0x4D, 0x5A];
+  const Android_executable=[0x50, 0x4B, 0x03, 0x04];
   
   if(size>25){
-    realFileElement.innerText = "Your file size is more than 25 MB, please submit a smaller file"
+    realFileElement.value = "Your file size is more than 25 MB, please submit a smaller file"
   }
   else{
-    if (Windows_executable.includes(uint8Array))
-    {
-       realFileElement.innerText = "Windows Executable Detected"
-    }
-    else if (Linux_executable.includes(uint8Array))
-    {
-       realFileElement.innerText = "Linux Executable Detected"
-    }
-    if (Android_executable.includes(uint8Array))
-    {
-       realFileElement.innerText = "Windows Executable Detected"
+    if (Windows_executable.includes(uint8Array))  {realFileElement.value = "Windows Executable Detected"}
+    else if (Linux_executable.includes(uint8Array))  {realFileElement.value = "Linux Executable Detected"}
+    else if (Android_executable.includes(uint8Array))  {realFileElement.value = "Android Executable Detected"}
+    else{
+      realFileElement.innerText = "Invalid File Type, Please only submit Windows, Linux or Android Executables!"
     }
   }
-
-  r= `The type of ${file.name} is：${Windows_executable(uint8Array) ? "image/png" : file.type}`;
 }
   </script>
   <!-- Github buttons -->
