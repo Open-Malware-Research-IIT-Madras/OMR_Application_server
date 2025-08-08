@@ -123,9 +123,9 @@
                 </div>
 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
-                <input class="form-control" type="text" value="Readonly input here..." aria-label="xyz is your file type" readonly>
+                <input class="form-control" type="text" id="FileType" aria-label="" readonly>
                 </div>
-
+                
                 <div style="padding-top: .5%; padding-bottom: .5%;">
                   <div class="dropdown">
   <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -142,6 +142,7 @@
 
                 <div class="mb-3" style="padding-top: 2%; padding-bottom: 2%;">
                   <button class="btn bg-gradient-success" type="submit" disabled>Submit form</button>
+                  <!-- hey smartie you thought you could inspect and modify the code? Kid, there is something called server-side validation hahahahahahahahah -->
                 </div>
               </form> 
          
@@ -429,14 +430,39 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
-  <script type ="module">
-    import fileType from 'https://cdn.jsdelivr.net/npm/file-type@21.0.0/+esm'
-    document.getElementById("formFileLg").addEventListener("change" ,printype, false);
-    function printype(){
-    var filename=this.files[0]
 
-    console.log(fileType(filename))
+  <script>
+  const realFileElement = document.querySelector("#FileType");
+  async function handleChange(event) {
+  const file = event.target.files[0];
+  const buffers = await readBuffer(file, 0, 8);
+  const size= Math.round(file.size/1048576) // storing the file size in MB
+  const uint8Array = new Uint8Array(buffers);
+  //Mime type declarations
+  const Windows_executable=[]
+  const Linux_executable=[]
+  const Android_executable=[]
+  
+  if(size>25){
+    realFileElement.innerText = "Your file size is more than 25 MB, please submit a smaller file"
+  }
+  else{
+    if (Windows_executable.includes(uint8Array))
+    {
+       realFileElement.innerText = "Windows Executable Detected"
     }
+    else if (Linux_executable.includes(uint8Array))
+    {
+       realFileElement.innerText = "Linux Executable Detected"
+    }
+    if (Android_executable.includes(uint8Array))
+    {
+       realFileElement.innerText = "Windows Executable Detected"
+    }
+  }
+
+  r= `The type of ${file.name} is：${Windows_executable(uint8Array) ? "image/png" : file.type}`;
+}
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

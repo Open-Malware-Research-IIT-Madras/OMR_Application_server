@@ -19,7 +19,7 @@ def welcome():
 def login_google():
     try:
         session.permanent = True
-        app.permanent_session_lifetime = timedelta(minutes=30)
+        app.permanent_session_lifetime = timedelta(minutes=15)
         logger.info('Calling Oauth')
         session['email'] = ''
         session['actual_name'] = ''
@@ -61,14 +61,21 @@ def authorize_google():
 # ---------------------- FILE UPLOAD PAGE ----------------------
 @app.route('/your-dashboard', methods=['GET'])
 def send_upload():
+    if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
+        return redirect('/')
+    logger.info('Inside the send upload function')
     return render_template("dashboard.html")
 
 # ---------------------- FILE SUBMISSION TABLE PAGE ----------------------
 @app.route('/submission-table', methods=['GET'])
 def submission_table():
+    if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
+        return redirect('/')
+    
+    table_data=
     
     
-    
+    logger.info('Inside the submission table function')
     return render_template("tables.html")
 
 @app.route('/signout')

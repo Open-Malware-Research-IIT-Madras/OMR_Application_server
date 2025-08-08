@@ -114,47 +114,31 @@
                   <th scope="col" style="width: 15%;">Job ID</th>
                   <th scope="col" style="width: 25%;">FileHash</th>
                   <th scope="col" style="width: 45%;">Comments</th>
-                  <th scope="col" style="width: 5%;">Job Status</th>
-                  <th scope="col" style="width: 10%;">Malware Execution Data</th>
+                  <th scope="col" style="width: 10%;">File Execution Data</th>
                  
                 </tr>
               </thead>
               <tbody style="color: inherit;">
+                {% for data in table_data %}
                 <tr>
                   <th scope="row">1</th>
                   <td>Mark</td>
                   <td>Otto</td>
                   <td><span class="badge bg-warning">Processing</span></td>
 
-                  </td>
                   <td style="padding-bottom: 1.5px; padding-top: 1.4%;">
                     <div class="btn-group" role="group" aria-label="Download Options">
                       <button type="button" class="btn btn-outline-dark on-hover" style="color:black; ">Raw Trails</button>
                       <button type="button" class="btn btn-outline-dark on-hover" style="color:black">RaDaR Trails</button>
                       <button type="button" class="btn btn-outline-dark on-hover" style="color:black">Detailed Report</button>
                     </div>
-
                   </td>
-                  
                 </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Larry</td>
-                  <td>the Bird</td>
-                  <td>@twitter</td>
-                </tr>
+                {% end for %}
                
               </tbody>
-            </table>
+            </table> 
 
-
-            
           </div>
         </div>
       </footer>
@@ -179,8 +163,8 @@
       </div>
       <hr class="horizontal dark my-1">
       <div class="card-body pt-sm-3 pt-0">
-        <!-- Sidebar Backgrounds -->
-        
+         <h5>user Information</h5>
+         <h5>user information2</h5>
         </div>
       <div>
            <a href="/signout" target="_blank" class="btn bg-gradient-danger active container-fluid" role="button" aria-pressed="true">Sign Out</a>
