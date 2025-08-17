@@ -92,7 +92,7 @@ def signout():
 @app.route('/filesend', methods=['POST'])
 def receive():
     print("The value of the path is", app.instance_path)
-
+    
     if request.method == 'POST':
         email = session.get('email')
         actual_name = session.get('actual_name')
@@ -154,8 +154,8 @@ def receive():
     return "Bad response, POST request criteria not satisfied"
 
 # ---------------------- FILE DOWNLOAD ----------------------
-@app.route('/download/<Trail_Name>', methods=['GET'])
-def send_email(Trail_Name):
-    path = "/home/omrapp/Desktop/reporthash/" + "radar_processed_" + Trail_Name + ".zip"
-    print("User is downloading trail file:", Trail_Name)
-    return send_file(path, as_attachment=True)
+# @app.route('/download/<Trail_Name>', methods=['GET'])
+# def send_email(Trail_Name):
+#     path = "/home/omrapp/Desktop/reporthash/" + "radar_processed_" + Trail_Name + ".zip"
+#     print("User is downloading trail file:", Trail_Name)
+#     return send_file(path, as_attachment=True)

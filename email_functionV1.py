@@ -133,7 +133,7 @@ def on_message_received(ch, method, properties, body):
         # Create ZIP archive of logs
         os.system(
             f"zip -j /home/omrapp/Desktop/reporthash/radar_processed_{report_file_name}.zip "
-            f"/home/omrapp/Desktop/reporthash/radar_processed_ostrails_{report_file_name}.csv "
+            f"/home/omrapp/Desktop/report/SYSLOGS_ADMIN_ONLYhash/radar_processed_ostrails_{report_file_name}.csv "
             f"/home/omrapp/Desktop/reporthash/radar_processed_networktrails_{report_file_name}.csv "
             f"/home/omrapp/Desktop/reporthash/returned_os_logs/{report_file_name}.csv "
             f"/home/omrapp/Desktop/reporthash/returned_network_logs/trafficLogs/eno1_{report_file_name}.pcap"
