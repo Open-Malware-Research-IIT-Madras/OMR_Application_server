@@ -3,7 +3,7 @@ from imports import *
 load_dotenv()
 
 #--------------------------------------------------
-def pushqueue(filehash, jobid):
+def pushqueue(filehash, jobid, machine_destination):
   
 #   RABBITMQ_USERNAME=os.getenv('RABBITMQ_USERNAME')
 #   RABBITMQ_PASSWORD=os.getenv('RABBITMQ_PASSWORD')
@@ -15,15 +15,15 @@ def pushqueue(filehash, jobid):
 
   channel =connection.channel()
 
-  channel.queue_declare("queue_1")
+  channel.queue_declare("master_job_queue")
   
   message = { 'File_Hash':filehash,
-               'Job_Id':jobid 
+               'Job_Id':jobid
                
                }
   
-  channel.basic_publish(exchange='',
-                      routing_key='queue_1',
+  channel.basic_publish(exchange='job_router',
+                      routing_key=machine_destination,
                       body=json.dumps(message) )
 
   print("Message pushed to the queue")

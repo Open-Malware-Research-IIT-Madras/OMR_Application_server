@@ -1,17 +1,4 @@
-<!--
-=========================================================
-* Material Dashboard 3 - v3.2.0
-=========================================================
 
-* Product Page: https://www.creative-tim.com/product/material-dashboard
-* Copyright 2024 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://www.creative-tim.com/license)
-* Coded by Creative Tim modified by Allan Pais
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,8 +57,6 @@
             <span class="nav-link-text" style="padding-left: 10px; font-style: normal;">Submission Dashboard</span>
           </a>
         </li>
-
-        
         <!-- <li class="nav-item">
           <a class="nav-link text-dark" href="../pages/archive.html">
             <i class="material-symbols-rounded opacity-5">receipt_long</i>
@@ -79,15 +64,9 @@
           </a> -->
       
         
-    
-    </div>
       </ul>
-      <div class="nav-item" style=" text-align: center; background-color: burlywood;">
-          <a class="nav-link text-dark" href="/signout">
-
-            <span class="nav-link-text" style="font-style: normal; font-size: larger;">Sign Out</span>
-          </a>
-        </div>
+    </div>
+    
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg " >
     <!-- Navbar -->
@@ -109,57 +88,15 @@
       <div class="row">
         <div class="ms-3">
           <h3 class="mb-0 h4 font-weight-bolder">Upload Malware Sample</h3>
-          
-          <img src="https://shorturl.at/PJga9" class="img-fluid" alt="User Photo" style="float:right; margin-right: 1%;"">
-          
-          <p class="mb-4">
-            Upload your Malware sample in the form given below.  
-          </p>
-             <form class="not-validated" action="/filesend" method="POST" style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%; margin-right:5% " enctype="multipart/form-data">
-                <div style="padding-top: .5%; padding-bottom: .5%;" >
-                  <label for="validationTextarea" class="form-label" style="color: black;"><h6>Please add your file comments (optional)</h6></label>
-
-                  <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Briefly describe the reason for file submission" style="width: 100%; height:100%" name="comments"></textarea>
-                  
-                </div>
-
-                <div style="padding-top: .5%; padding-bottom: .5%;">
-                  <label for="formFileLg" class="form-label" style="color: black;">Select your Malware file for upload [only zip files with one executable allowed]</label>
-                  <input class="form-control form-control-lg" id="file_selection" type="file" name='files' onchange="checksize(event)">
-                </div>
-
-                <div style="padding-top: .5%; padding-bottom: .5%;">
-                <input class="form-control" type="text" id="file_selection_op" value="" aria-label="" readonly>
-                </div>
-                
-                <div style="padding-top: .5%; padding-bottom: .5%;">
-                  <div class="dropdown" id="osm_selection">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Select Operating System & Machine
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Windows 10 Lenovo Thinkcentre</a></li>
-                      <li><a class="dropdown-item" href="#">Ubuntu 22.04 Dell Optiplex</a></li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div style="padding-top: .5%; padding-bottom: .5%;">
-                <input class="form-control" type="text" id="osm_selection_op" value="" aria-label="" readonly>
-                </div>
-
-                <div class="mb-3" style="padding-top: 2%; padding-bottom: 2%;">
-                  <button class="btn bg-gradient-success" type="submit" value= "Upload" enable>Submit form</button>
-                  <!-- hey smartie you thought you could inspect and modify the code? Kid, there is something called server-side validation hahahahahahahahah -->
-                </div>
-              </form> 
          
-          </div>
+         
         </div>
+      </div>
       </footer>
     </div>
   </main>
- 
+  
+    </div>
   </div>
 
   <!--   Core JS Files   -->
@@ -168,43 +105,9 @@
   <script src="../static/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="../static/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="../static/js/plugins/chartjs.min.js"></script>
-<!--   
-  ------------------------------------------------------------------------------------- -->
-  <script>
-  function mime_type(event){
-  // const file_input_type = document.querySelector("file");
-  // const realFileElement = document.querySelector("FileType");
-  // console.log("We have entered the file upload js section");
-  // const file = event.target.files[0];
-  // const buffers = readBuffer(file, 0, 8);
+
+  <!--------------------------------------------------------------------------------------- -->
   
-  // const uint8Array = new Uint8Array(buffers);
-  // console.log(uint8Array);
-  // //Mime type declarations
-  // const Linux_executable=[0x7F, 0x45, 0x4C, 0x46];
-  // const Windows_executable=[0x4D, 0x5A];
-  // const Android_executable=[0x50, 0x4B, 0x03, 0x04];
-  
- 
-    if (Windows_executable.includes(uint8Array))  {realFileElement.value = "Windows Executable Detected"}
-    else if (Linux_executable.includes(uint8Array))  {realFileElement.value = "Linux Executable Detected"}
-    else if (Android_executable.includes(uint8Array))  {realFileElement.value = "Android Executable Detected"}
-    else{
-      realFileElement.innerText = "Invalid File Type, Please only submit Windows, Linux or Android Executables!"
-    }
-}
-
-  function checksize(event){
-
-    const size= Math.round(file.size/1048576); // storing the file size in MB
-    console.log(size)
-    if(size>25){
-    realFileElement.value = "Your file size is more than 25 MB, please submit a smaller file"
-  }
-
-}
-
-  </script>
   
  
   
@@ -451,6 +354,34 @@
     }
   </script>
 
+  <script>
+  function mime_type(event){
+  const file_input_type = document.querySelector("file");
+  const realFileElement = document.querySelector("FileType");
+  console.log("We have entered the file upload js section");
+  const file = event.target.files[0];
+  const buffers = readBuffer(file, 0, 8);
+  const size= Math.round(file.size/1048576); // storing the file size in MB
+  const uint8Array = new Uint8Array(buffers);
+  console.log(uint8Array);
+  //Mime type declarations
+  const Linux_executable=[0x7F, 0x45, 0x4C, 0x46];
+  const Windows_executable=[0x4D, 0x5A];
+  const Android_executable=[0x50, 0x4B, 0x03, 0x04];
+  
+  if(size>25){
+    realFileElement.value = "Your file size is more than 25 MB, please submit a smaller file"
+  }
+  else{
+    if (Windows_executable.includes(uint8Array))  {realFileElement.value = "Windows Executable Detected"}
+    else if (Linux_executable.includes(uint8Array))  {realFileElement.value = "Linux Executable Detected"}
+    else if (Android_executable.includes(uint8Array))  {realFileElement.value = "Android Executable Detected"}
+    else{
+      realFileElement.innerText = "Invalid File Type, Please only submit Windows, Linux or Android Executables!"
+    }
+  }
+}
+  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

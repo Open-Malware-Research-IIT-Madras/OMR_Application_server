@@ -92,7 +92,7 @@ def signout():
 @app.route('/filesend', methods=['POST'])
 def receive():
     print("The value of the path is", app.instance_path)
-    
+    error_list=[]
     if request.method == 'POST':
         email = session.get('email')
         actual_name = session.get('actual_name')
@@ -103,15 +103,24 @@ def receive():
 
         user_id = User_Check(email=email, username=actual_name, oauth_information=oauth_token)
         comments = request.form['comments']
-        filename = file.filename
-
+        filename = file.filename 
+        machine_destination=request.form['machine_destination']  #taking the OS on which the file will run 
+        
+        
+        # <__toadd__> also take the time for execution 
+        file_ext=''
         if filename != '':
             file_ext = os.path.splitext(filename)[1]
         else:
-            return "You have not uploaded any file! Please try again!"
+            error_list.append("You have not uploaded any file!")
+        
 
         if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-            return "File type not supported. Please try again with executables only!"
+            error_list.append("Only passwordless zip files with a single executable are allowed!")
+            
+        if machine_destination == '':
+           error_list.append("You have not selected a machine to run the file on")
+                       
 
         filename_to_send = filename
         filename = secure_filename(filename)
@@ -125,9 +134,12 @@ def receive():
             setReq(user_id, job_id, comments)
 
             if status == 2:
+                
                 email_to_send= [email]
                 multi_mail('send_success_email',filename.split('.')[0], job_id, email_to_send, actual_name)
+                
                 return "This job has been successfully processed earlier. You will receive your report soon via email."
+            
             elif status == 0 or status == 1:
                 return "File is under processing"
         else:
@@ -140,7 +152,7 @@ def receive():
 
             email_to_send = [email]
             multi_mail('job_sent_ack', filename_to_send, job_id, email_to_send, actual_name)
-            pushqueue(file_md5_hash, job_id)
+            pushqueue(file_md5_hash, job_id, machine_destination)
             file.seek(0)
 
             return render_template(

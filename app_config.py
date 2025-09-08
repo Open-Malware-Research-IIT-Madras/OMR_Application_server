@@ -22,10 +22,10 @@ try:
     app.config["SESSION_TYPE"] = "filesystem"
     Session(app)
 
-    app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100 MB max upload
+    app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024  # 20 MB max upload before desk reject.
     CORS(app)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     app.config['UPLOAD_FOLDER'] = '/home/omrapp/Desktop/filehash/'
