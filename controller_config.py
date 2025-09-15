@@ -4,8 +4,10 @@ from imports import *
 from multipurpose_email import *
 from flask import session, send_file, redirect, url_for, render_template, request
 from app_config import *
+from file_checks import process_zip
 
 username_list = []
+picture =""
 
 # ---------------------- ROOT CONTROLLER ----------------------
 @app.route("/")
@@ -45,13 +47,15 @@ def authorize_google():
     session['email'] = user_info['email']
     session['actual_name'] = user_info['name']
     session['oauth_token'] = json.dumps(token)
+    # print("this is the oauth token",json.dumps(token)
+    # picture=session['oauth_token']['user_info']['picture'] 
 
     email_verification_status = user_info['email_verified']
     if email_verification_status != True:
         return "Your email is not verified, Please verify it first and then proceed with the file upload"
 
     username_list.append(session['email'])
-
+   
     print("From the authorize function call username is ", session.get('actual_name'))
     print("From the authorize function call email id is ", session.get('email'))
     print("From the authorization function call token is", session.get('oauth_token'))
@@ -97,35 +101,31 @@ def receive():
         email = session.get('email')
         actual_name = session.get('actual_name')
         oauth_token = session.get('oauth_token')
+        user_information = oauth_token['user_info']
+        picture = user_information['picture']
+        
 
         file = request.files['files']
-        print("Values from session:", email, actual_name, oauth_token)
-
-        user_id = User_Check(email=email, username=actual_name, oauth_information=oauth_token)
+        
+        print("Values from session:", email, actual_name, user_information)
+       
+        user_id = User_Check(email=email, username=actual_name, oauth_information=user_information)
         comments = request.form['comments']
         filename = file.filename 
         machine_destination=request.form['machine_destination']  #taking the OS on which the file will run 
         
         
-        # <__toadd__> also take the time for execution 
-        file_ext=''
-        if filename != '':
-            file_ext = os.path.splitext(filename)[1]
-        else:
-            error_list.append("You have not uploaded any file!")
+        file_md5_hash, filename_to_send, filesize, error_list = process_zip(file, 25, app.config['UPLOAD_EXTENSIONS'])
+        #calling the zipfile check function and returning basic information 
         
-
-        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
-            error_list.append("Only passwordless zip files with a single executable are allowed!")
-            
-        if machine_destination == '':
-           error_list.append("You have not selected a machine to run the file on")
-                       
-
-        filename_to_send = filename
-        filename = secure_filename(filename)
-        file_md5_hash = hashlib.md5(file.read()).hexdigest()
-        filename = file_md5_hash + ".dat"
+        
+        if len(error_list)>0:
+            return render_template(
+                  "filefailure.html",
+                  errors=error_list
+            )
+        
+        filename=file_md5_hash
 
         # Check if file has already been processed
         status, trail, job_id = checkMalware(filename)
@@ -138,17 +138,24 @@ def receive():
                 email_to_send= [email]
                 multi_mail('send_success_email',filename.split('.')[0], job_id, email_to_send, actual_name)
                 
-                return "This job has been successfully processed earlier. You will receive your report soon via email."
+                flash("This job has been successfully processed earlier. You will receive your report soon via email.")
+                return render_template('submission_table.html')
             
             elif status == 0 or status == 1:
-                return "File is under processing"
+                flash("Kindly wait, somebody has uploaded the same file that you have that is currently in process. You will be notified shortly")
         else:
             job_id = enterMalware(filename, user_id)
             setReq(user_id, job_id, comments)
 
             file.seek(0)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            os.chmod(os.path.join(app.config['UPLOAD_FOLDER'], filename), 0o777)
+            #insert the file split function here 
+            save_location_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(save_location_path)
+            
+            p=subprocess.Popen([f'mkdir {save_location_path}{file_md5_hash} ; zip  '],shell=True, stdout=subprocess.PIPE)
+            p.wait()
+            print("file split into 5 parts and stored in NFS")
+
 
             email_to_send = [email]
             multi_mail('job_sent_ack', filename_to_send, job_id, email_to_send, actual_name)

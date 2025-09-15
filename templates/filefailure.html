@@ -48,7 +48,7 @@
         <li class="nav-item">
           <a class="nav-link active bg-gradient-dark text-white" href="/your-dashboard">
             <i class="material-symbols-rounded opacity-5">cloud</i>
-            <span class="nav-link-text" style="padding-left: 10px; ">Upload Malware Sample</span>
+            <span class="nav-link-text" style="padding-left: 10px; font-size: larger;>Upload Malware Sample</span>
           </a>
         </li>
         <li class="nav-item">
@@ -57,12 +57,7 @@
             <span class="nav-link-text" style="padding-left: 10px; font-style: normal;">Submission Dashboard</span>
           </a>
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link text-dark" href="../pages/archive.html">
-            <i class="material-symbols-rounded opacity-5">receipt_long</i>
-            <span class="nav-link-text" style="padding-left: 10px; font-style: normal;">Submission Archive</span>
-          </a> -->
-      
+ 
         
       </ul>
     </div>
@@ -354,34 +349,7 @@
     }
   </script>
 
-  <script>
-  function mime_type(event){
-  const file_input_type = document.querySelector("file");
-  const realFileElement = document.querySelector("FileType");
-  console.log("We have entered the file upload js section");
-  const file = event.target.files[0];
-  const buffers = readBuffer(file, 0, 8);
-  const size= Math.round(file.size/1048576); // storing the file size in MB
-  const uint8Array = new Uint8Array(buffers);
-  console.log(uint8Array);
-  //Mime type declarations
-  const Linux_executable=[0x7F, 0x45, 0x4C, 0x46];
-  const Windows_executable=[0x4D, 0x5A];
-  const Android_executable=[0x50, 0x4B, 0x03, 0x04];
-  
-  if(size>25){
-    realFileElement.value = "Your file size is more than 25 MB, please submit a smaller file"
-  }
-  else{
-    if (Windows_executable.includes(uint8Array))  {realFileElement.value = "Windows Executable Detected"}
-    else if (Linux_executable.includes(uint8Array))  {realFileElement.value = "Linux Executable Detected"}
-    else if (Android_executable.includes(uint8Array))  {realFileElement.value = "Android Executable Detected"}
-    else{
-      realFileElement.innerText = "Invalid File Type, Please only submit Windows, Linux or Android Executables!"
-    }
-  }
-}
-  </script>
+
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

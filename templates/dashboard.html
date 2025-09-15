@@ -110,26 +110,22 @@
         <div class="ms-3">
           <h3 class="mb-0 h4 font-weight-bolder">Upload Malware Sample</h3>
           
-          <img src="https://shorturl.at/PJga9" class="img-fluid" alt="User Photo" style="float:right; margin-right: 1%;"">
+          <img src=profile_picture class="img-fluid" alt="User Photo" style="float:right; margin-right: 1%;"">
           
           <p class="mb-4">
             Upload your Malware sample in the form given below.  
           </p>
-             <form class="not-validated" action="/filesend" method="POST" style="margin-top: 5%; margin-bottom: 5%; margin-left: 2%; margin-right:5% " enctype="multipart/form-data">
+             <form class="not-validated" action="/filesend" method="POST" style="margin-top: 5%; margin-bottom: 5%; margin-left: 1%; margin-right:5% " enctype="multipart/form-data">
                 <div style="padding-top: .5%; padding-bottom: .5%;" >
                   <label for="validationTextarea" class="form-label" style="color: black;"><h6>Please add your file comments (optional)</h6></label>
 
-                  <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Briefly describe the reason for file submission" style="width: 100%; height:100%" name="comments"></textarea>
+                  <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Briefly describe the reason for file submission in not more than 100 words (How you came accross the file/ Application on which file was received etc.)" style="width: 100%; height:100%" maxlength="100" name="comments"></textarea>
                   
                 </div>
 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
-                  <label for="formFileLg" class="form-label" style="color: black;">Select your Malware file for upload [only zip files with one executable allowed]</label>
+                  <label for="formFileLg" class="form-label" style="color: black;"><h6>Select your Malware file for upload [only zip files with one executable allowed]</h6></label>
                   <input class="form-control form-control-lg" id="file_selection" type="file" name='files' onchange="checksize(event)">
-                </div>
-
-                <div style="padding-top: .5%; padding-bottom: .5%;">
-                <input class="form-control" type="text" id="file_selection_op" value="" aria-label="" readonly>
                 </div>
                 
                 <div style="padding-top: .5%; padding-bottom: .5%;">
@@ -138,18 +134,19 @@
                       Select Operating System & Machine
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Windows 10 Lenovo Thinkcentre</a></li>
-                      <li><a class="dropdown-item" href="#">Ubuntu 22.04 Dell Optiplex</a></li>
+                      <li><a class="dropdown-item" href="#">Windows 10 Lenovo Thinkcentre (WLT)</a></li>
+                      <li><a class="dropdown-item" href="#">Ubuntu 22.04 Dell Optiplex (LDO)</a></li>
+                      <li><a class="dropdown-item" href="#">Android 10 Motorola phone (AMP)</a></li>
                     </ul>
                   </div>
                 </div>
 
-                <div style="padding-top: .5%; padding-bottom: .5%;">
+                <div style=" padding-bottom: .5%;">
                 <input class="form-control" type="text" id="osm_selection_op" value="" aria-label="" readonly>
                 </div>
 
-                <div class="mb-3" style="padding-top: 2%; padding-bottom: 2%;">
-                  <button class="btn bg-gradient-success" type="submit" value= "Upload" enable>Submit form</button>
+                <div class="mb-5" style="padding-top: 2%; padding-bottom: 2%;">
+                  <button class="btn bg-gradient-success" type="submit" value= "Upload" enable>Submit file to the testbed for analysis</button>
                   <!-- hey smartie you thought you could inspect and modify the code? Kid, there is something called server-side validation hahahahahahahahah -->
                 </div>
               </form> 
@@ -170,7 +167,7 @@
   <script src="../static/js/plugins/chartjs.min.js"></script>
 <!--   
   ------------------------------------------------------------------------------------- -->
-  <script>
+  <!-- <script>
   function mime_type(event){
   // const file_input_type = document.querySelector("file");
   // const realFileElement = document.querySelector("FileType");
@@ -205,7 +202,7 @@
 }
 
   </script>
-  
+   -->
  
   
   <script>

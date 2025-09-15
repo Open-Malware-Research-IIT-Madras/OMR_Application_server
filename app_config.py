@@ -29,11 +29,7 @@ try:
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     app.config['UPLOAD_FOLDER'] = '/home/omrapp/Desktop/filehash/'
-    app.config['UPLOAD_EXTENSIONS'] = [
-        '.exe', '.com', '.bat', '.cmd', '.msi', '.msp', '.scr', '.ps1', '.vbs', 
-        '.js', '.wsf', '.jse', '.vbe', '.pif', '.gadget', '.hta', '.appx', 
-        '.appxbundle', '.msix', '.msixbundle'
-    ]
+    app.config['UPLOAD_EXTENSIONS'] = ['exe', 'elf', 'apk']
 
     app.config['DEBUG'] = True
     app.config['TESTING'] = False
