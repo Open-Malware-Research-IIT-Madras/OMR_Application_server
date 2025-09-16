@@ -23,6 +23,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_session import Session
 from flask_login import logout_user
 from flask_cors import CORS
+from flask_caching import Cache
 
 from werkzeug.utils import secure_filename
 from authlib.integrations.flask_client import OAuth

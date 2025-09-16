@@ -14,6 +14,8 @@ logger.info('Logging Starts')
 # Flask app configuration
 logger.info('Flask config start')
 app = Flask(__name__)
+cache=Cache(app, config={'CACHE_TYPE':'SimpleCache'})
+
 
 try:
     app.config['SESSION_COOKIE_SECURE'] = False

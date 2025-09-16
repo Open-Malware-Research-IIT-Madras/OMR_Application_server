@@ -11,6 +11,7 @@ picture =""
 
 # ---------------------- ROOT CONTROLLER ----------------------
 @app.route("/")
+@cache.cached(timeout = 60, key_prefix='login')
 def welcome():
     logger.info('Inside the welcome function at root')
     return render_template("sign-in.html")
@@ -48,7 +49,7 @@ def authorize_google():
     session['actual_name'] = user_info['name']
     session['oauth_token'] = json.dumps(token)
     # print("this is the oauth token",json.dumps(token)
-    # picture=session['oauth_token']['user_info']['picture'] 
+    
 
     email_verification_status = user_info['email_verified']
     if email_verification_status != True:
@@ -62,21 +63,24 @@ def authorize_google():
 
     return redirect(url_for('send_upload'))
 
+
+
 # ---------------------- FILE UPLOAD PAGE ----------------------
 @app.route('/your-dashboard', methods=['GET'])
+@cache.cached(timeout = 30, key_prefix='your-dashboard')
 def send_upload():
+    picture=session['oauth_token']['user_info']['picture'] 
     if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
         return redirect('/')
     logger.info('Inside the send upload function')
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", profile_picture=picture)
 
 # ---------------------- FILE SUBMISSION TABLE PAGE ----------------------
 @app.route('/submission-table', methods=['GET'])
+@cache.cached(timeout = 30, key_prefix='submission-table')
 def submission_table():
     if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
         return redirect('/')
-    
-    # table_data=
     
     logger.info('Inside the submission table function')
     return render_template("tables.html")
@@ -87,11 +91,6 @@ def signout():
     return redirect('/')
 
 
-# @app.route('/contact')
-# def email_contact():
-#     # This function is yet to be implemented 
-#     pass 
-
 # ---------------------- FILE RECEIVE HANDLER ----------------------
 @app.route('/filesend', methods=['POST'])
 def receive():
@@ -101,8 +100,11 @@ def receive():
         email = session.get('email')
         actual_name = session.get('actual_name')
         oauth_token = session.get('oauth_token')
-        user_information = oauth_token['user_info']
-        picture = user_information['picture']
+        oauth_values = json.loads(oauth_token)
+        print("These are the oauth values")
+        #print(oauth_token['user_info'])
+        user_information = oauth_values['user_info']
+        picture=session['oauth_token']['user_info']['picture'] 
         
 
         file = request.files['files']
