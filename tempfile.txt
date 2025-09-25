@@ -1,0 +1,6 @@
+tempfile.txt 
+
+these are some important commands
+
+--- cat input.z* > output.zip
+--- 7z a new.zip alphaproof-outputs.zip -v1k

@@ -1,0 +1,1 @@
+/home/omrapp/Desktop/Jugaad_testV1/bin/gunicorn --pythonpath=/home/omrapp/Desktop/Jugaad_testV1/bin/python3 --bind 127.0.0.1:5000 --workers 6 app:app
