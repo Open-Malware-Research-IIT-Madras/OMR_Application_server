@@ -1,12 +1,7 @@
-<<<<<<< HEAD
 import os
 import zipfile
 import subprocess
 import math 
-=======
-import zipfile
-import subprocess
->>>>>>> bc7eae3a1ef1255a73788d98f6366e9d68dfc7f2
 
 def process_zip(zip_file, allowed_rawfile_size, extension_list):
     
@@ -40,7 +35,6 @@ def process_zip(zip_file, allowed_rawfile_size, extension_list):
         error_list.append(f"{file_ext} File extension is not supported")
     
     if len(error_list)>0:
-<<<<<<< HEAD
         hash_value="Errors found"
         filename="Errors found"
         file_size=None 
@@ -55,11 +49,5 @@ def process_zip(zip_file, allowed_rawfile_size, extension_list):
     
     return (hash_value, error_list)
 
-=======
-        hash_value="NA"
-        filename="NA"
-    
-    return (hash_value, filename, file_size, error_list)
->>>>>>> bc7eae3a1ef1255a73788d98f6366e9d68dfc7f2
 
 #unit testing 
