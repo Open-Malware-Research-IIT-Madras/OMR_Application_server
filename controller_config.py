@@ -69,11 +69,12 @@ def authorize_google():
 @app.route('/your-dashboard', methods=['GET'])
 @cache.cached(timeout = 30, key_prefix='your-dashboard')
 def send_upload():
-    picture=session['oauth_token']['user_info']['picture'] 
+    # picture=session['oauth_token']['user_info']['picture'] 
     if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
         return redirect('/')
     logger.info('Inside the send upload function')
-    return render_template("dashboard.html", profile_picture=picture)
+    # return render_template("dashboard.html", profile_picture=picture)
+    return render_template("dashboard.html")
 
 # ---------------------- FILE SUBMISSION TABLE PAGE ----------------------
 @app.route('/submission-table', methods=['GET'])
