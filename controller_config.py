@@ -73,8 +73,14 @@ def send_upload():
     if 'email' not in session or 'actual_name' not in session or 'oauth_token' not in session:
         return redirect('/')
     logger.info('Inside the send upload function')
+    machine_list=[
+        "[LM1] : Ubuntu 22.04, Dell Optiplex", 
+        "[LM2] : Ubuntu 24.04, Asus", 
+        "[WM1] : Windows 10, Lenovo think center",
+        "[AP1] : Android 10, Dell Optiplex"
+    ]
     # return render_template("dashboard.html", profile_picture=picture)
-    return render_template("dashboard.html")
+    return render_template("dashboard.html", machines = machine_list)
 
 # ---------------------- FILE SUBMISSION TABLE PAGE ----------------------
 @app.route('/submission-table', methods=['GET'])
