@@ -74,10 +74,10 @@ def send_upload():
         return redirect('/')
     logger.info('Inside the send upload function')
     machine_list=[
-        "[LM1] : Ubuntu 22.04, Dell Optiplex", 
-        "[LM2] : Ubuntu 24.04, Asus", 
-        "[WM1] : Windows 10, Lenovo think center",
-        "[AP1] : Android 10, Dell Optiplex"
+        "[WM01] : Windows 10, Lenovo think center",
+        "[LM01] : Ubuntu 22.04, Dell Optiplex", 
+        "[LM02] : Ubuntu 24.04, Asus", 
+        "[AP01] : Android 10, Dell Optiplex"
     ]
     # return render_template("dashboard.html", profile_picture=picture)
     return render_template("dashboard.html", machines = machine_list)
@@ -103,40 +103,39 @@ def signout():
 def receive():
     print("The value of the path is", app.instance_path)
     error_list=[]
+    print("In the function 1")
     if request.method == 'POST':
         email = session.get('email')
         actual_name = session.get('actual_name')
-        oauth_token = session.get('oauth_token')
-        oauth_values = json.loads(oauth_token)
-        print("These are the oauth values")
-        #print(oauth_token['user_info'])
-        user_information = oauth_values['user_info']
-        picture=session['oauth_token']['user_info']['picture'] 
+        token_temp_store=session.get('oauth_token')
+        oauth_token = json.loads(token_temp_store)
         
-
-        file = request.files['files']
+        print("This is the oauth token", oauth_token)
+        
+        user_information = oauth_token['userinfo']
+        picture=user_information['picture'] 
+        file = request.files['file']
         
         print("Values from session:", email, actual_name, user_information)
        
         user_id = User_Check(email=email, username=actual_name, oauth_information=user_information)
-        comments = request.form['comments']
+        comments = request.form['Comments']
         filename = file.filename 
-        machine_destination=request.form['machine_destination']  #taking the OS on which the file will run 
+        machine_destination=request.form['Machine']  #taking the OS on which the file will run 
         
-        
-        file_md5_hash, filename_to_send, filesize, error_list = process_zip(file, 25, app.config['UPLOAD_EXTENSIONS'])
-        #calling the zipfile check function and returning basic information 
-        
-        
+        print("Calline the process_zip method of file_checks")
+
+        file_md5_hash, error_list = process_zip(file, 25, app.config['UPLOAD_EXTENSIONS'])
+        print("These are the errors that are recorded",error_list)
         if len(error_list)>0:
             return render_template(
                   "filefailure.html",
-                  errors=error_list
+                   errors=error_list
             )
         
         filename=file_md5_hash
 
-        # Check if file has already been processed
+        
         status, trail, job_id = checkMalware(filename)
 
         if status != -1 and trail != -1 and job_id != -1:
@@ -157,7 +156,7 @@ def receive():
             setReq(user_id, job_id, comments)
 
             file.seek(0)
-            #insert the file split function here 
+         
             save_location_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(save_location_path)
             

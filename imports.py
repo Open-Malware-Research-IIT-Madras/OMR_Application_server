@@ -6,12 +6,11 @@ import json
 import psycopg2
 import subprocess
 import zipfile
-#from zipfile import ZipFile
 import datetime
 import time
 import requests
 import smtplib
-import file_checks
+import math
 from os.path import basename
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart

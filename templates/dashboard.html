@@ -86,11 +86,12 @@
           <p class="mb-4">
             Upload your Malware sample in the form given below.  
           </p>
-             <form class="form-group" action="/filesend" method="POST" enctype="multipart/form-data" id = "FormInputData" style="flex-flow: column; margin-right: 5%;">
+
+             <form class="form-group" action="/filesend" method="POST" enctype="multipart/form-data" style="flex-flow: column; margin-right: 5%;">
              <div style="padding-bottom: 2%;" value="">
 
                 <label for="FormControlSelect1"><h5>Select your Machine to run the file on</h5></label>
-                <select class="form-control" id="Machine">
+                <select class="form-control" name="Machine">
                {% for machine in machines %}
                <option>{{ machine }}</option>
                {% endfor %}
@@ -100,15 +101,15 @@
               <div class="form-group" style="padding-bottom: 2%;">
                 <label for="FormControlSelect2"> <h5>Upload your file</h5></label>
                 <br>
-                <input type="file" multiple class="form-control.file" id="File">
+                <input type="file" multiple class="form-control.file" name="file">
                 
               </div>
 
               <div class="form-group" style="padding-bottom: 2%">
                 <label for="FormControlTextarea1"><h5>Write down your file comments if any</h5></label>
-                <textarea class="form-control" id="FormControlTextarea1" rows="3" maxlength="300" placeholder="Max (300 charachters)"></textarea>
+                <textarea class="form-control" id="FormControlTextarea1" rows="3" maxlength="300" placeholder="Max (300 charachters)" name="Comments"></textarea>
               </div>
-              
+
               <div style="margin:auto;">
               <button type="submit" type="button" class="btn btn-dark" >Submit file to the testbed</button>
             </div>           
