@@ -1,3 +1,38 @@
+"""
+Module Name: controller_config.py
+
+Description:
+    Main Flask controller for the OMR WebApp. Handles:
+        - Root route and login via Google OAuth
+        - OAuth callback and session management
+        - Dashboard and submission table pages
+        - File upload handling, validation, and storage
+        - Malware processing, job tracking, and email notifications
+        - Caching for frequently accessed pages
+        - User sign-out
+
+Functions:
+    welcome(): Renders the login page.
+    login_google(): Initiates Google OAuth login flow.
+    authorize_google(): Handles OAuth callback and session setup.
+    send_upload(): Renders the file upload dashboard.
+    submission_table(): Renders the submission table page.
+    signout(): Clears session and redirects to login.
+    receive(): Handles POST requests for file uploads, triggers
+        malware processing, email notifications, and job queuing.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Run the Flask app to start the server, or import this module to
+    include the controller routes in a larger Flask application.
+
+Author:
+    Allan Pais
+"""
+
+
 from email_config import *
 from database_config import *
 from imports import *
@@ -127,6 +162,7 @@ def receive():
 
         file_md5_hash, error_list = process_zip(file, 25, app.config['UPLOAD_EXTENSIONS'])
         print("These are the errors that are recorded",error_list)
+        
         if len(error_list)>0:
             return render_template(
                   "filefailure.html",

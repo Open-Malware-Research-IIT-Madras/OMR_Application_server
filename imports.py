@@ -1,3 +1,25 @@
+"""
+Module Name: imports.py
+
+Description:
+    Centralized import and configuration module for the OMR WebApp.
+    Loads environment variables, defines constants for OAuth, Flask
+    application settings, RabbitMQ, PostgreSQL, and SMTP email service.
+
+Functions:
+    None defined explicitly in this file.
+
+Classes:
+    None defined explicitly in this file.
+
+Usage:
+    Import this module to access preconfigured constants and settings
+    used across the application (e.g., database, mail, or OAuth setup).
+
+Author:
+    Allan Pais
+"""
+
 import os
 import uuid
 import pika

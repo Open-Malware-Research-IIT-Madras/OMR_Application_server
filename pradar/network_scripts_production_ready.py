@@ -1,3 +1,37 @@
+"""
+Module Name: network_scripts_production_ready.py
+
+Description:
+    Provides functionality to process PCAP network traffic files using
+    Zeek and consolidate the resulting logs into a structured DataFrame.
+    Includes:
+        - log_filter(PATH): merges and cleans Zeek log files into a
+          single Pandas DataFrame, handling duplicate UIDs.
+        - zeek_process(file_name): runs Zeek on a given PCAP, moves
+          relevant logs, filters them, and outputs a CSV report.
+
+Functions:
+    log_filter(PATH):
+        Reads and merges Zeek log files from the given directory, cleans
+        headers, removes duplicates, and returns a merged DataFrame.
+    zeek_process(file_name):
+        Runs Zeek on a PCAP file, collects selected logs, filters them,
+        and stores a processed CSV report.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Import to call zeek_process() with a filename (without extension) to
+    process a PCAP:
+        zeek_process("capture1")
+
+    Or run interactively for testing by uncommenting the input lines.
+
+Author:
+    Allan Pais
+"""
+
 import pandas as pd 
 import os
 import subprocess

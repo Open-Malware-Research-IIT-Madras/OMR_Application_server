@@ -1,3 +1,31 @@
+"""
+Module Name: os_scripts_production_ready.py
+
+Description:
+    Compares baseline OS process data against new process logs to
+    identify deviations. Loads a base pickle file and a new CSV,
+    constructs process-to-PID mappings, excludes processes based on
+    differences, and outputs a filtered CSV report.
+
+Functions:
+    os_scripts(filename):
+        Compares the baseline process dataset with a new dataset from
+        returned OS logs, removes excluded processes, and writes a
+        processed CSV to the report directory.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Import and call os_scripts() with a filename (without extension) to
+    process OS logs:
+        os_scripts("log1")
+
+Author:
+    Allan Pais
+"""
+
+
 import pandas as pd
 
 def os_scripts(filename):

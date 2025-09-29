@@ -1,3 +1,26 @@
+"""
+Module Name: app_server.py
+
+Description:
+    Flask-based web application server configuration for OMR WebApp.
+    Sets up logging, session management, caching, mail, CORS, OAuth,
+    PostgreSQL database, and RabbitMQ messaging integration.
+
+Functions:
+    None defined explicitly in this file. Configuration and setup only.
+
+Classes:
+    None defined explicitly in this file.
+
+Usage:
+    Import this module to initialize the Flask application server and
+    its dependencies, or run it as the main entry point to launch the
+    configured app.
+
+Author:
+    Allan Pais
+"""
+
 from imports import *
 from apikey import *
 

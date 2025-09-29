@@ -1,3 +1,27 @@
+"""
+Module Name: email_config.py
+
+Description:
+    Provides functionality to send processed malware report results via
+    email. Builds a message with subject, body, and file attachments,
+    then sends it through Gmail’s SMTP server using TLS.
+
+Functions:
+    direct_mail_sent(emails, file_hash):
+        Sends an email with a processed report (.txt file) attached to
+        the given recipient address. Uses Gmail SMTP for delivery.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Call direct_mail_sent() with the recipient email and file hash:
+        direct_mail_sent("user@example.com", "hash123")
+
+Author:
+    Allan Pais
+"""
+
 from app_config import *
 
 def direct_mail_sent(emails,file_hash):

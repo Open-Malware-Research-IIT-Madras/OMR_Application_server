@@ -1,3 +1,34 @@
+"""
+Module Name: multipurpose_email.py
+
+Description:
+    Provides utilities to send various automated emails for the 
+    OpenMalwareResearch service. Supports multiple templates including:
+        - Admin error report
+        - User error report
+        - Job submission acknowledgment
+        - Successful report delivery with download link
+
+Functions:
+    collect_subject_body(option, msg, jobid, receiver_email, send_to_name):
+        Constructs the email subject, body, and recipient list based on
+        the provided template option.
+    multi_mail(option, msg, job_id, receiver_email, send_to_name=""):
+        Sends emails to one or more recipients using SMTP with TLS, 
+        using the template selected in 'option'.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Call multi_mail() with the appropriate option, message, job ID, 
+    and recipient info to send emails:
+        multi_mail('job_sent_ack', 'filehash123', 1001, ['user@example.com'], 'Allan Pais')
+
+Author:
+    Allan Pais
+"""
+
 # This is a standard email sender to be deployed on all servers for non-trail mails
 
 from imports import *

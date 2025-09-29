@@ -1,5 +1,24 @@
-#!/home/omrapp/Desktop/Jugaad_testV1/bin/python
-#Location of the virtual environment 
+"""
+Module Name: app.py
+
+Description:
+    Entry point for the OMR WebApp. Loads all configuration modules 
+    (API keys, imports, database, controller, email, and app settings),
+    initializes logging, and starts the Flask application.
+
+Functions:
+    None defined explicitly in this file.
+
+Classes:
+    None defined explicitly in this file.
+
+Usage:
+    Run this script directly to start the Flask server:
+        python main.py
+
+Author:
+    Allan Pais
+"""
 
 from apikey import *
 from imports import *

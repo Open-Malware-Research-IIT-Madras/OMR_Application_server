@@ -1,3 +1,43 @@
+"""
+Module Name: database_config.py
+
+Description:
+    Provides utility functions for interacting with the database and 
+    RabbitMQ queue in the OMR WebApp. Handles user management, malware 
+    job tracking, request logging, and message publishing.
+
+Functions:
+    pushqueue(filehash, jobid, machine_destination):
+        Sends a job message to RabbitMQ for processing on a specified machine.
+    User_Check(email, username, oauth_information):
+        Checks if a user exists; increments NOR if yes, inserts new user if not.
+    checkMalware(filehash):
+        Checks for an existing malware record by file hash and returns status, trail, and job ID.
+    enterMalware(filehash, user_id):
+        Inserts a new malware record for a given user; returns the job ID.
+    setReq(user_id, job_id, comment):
+        Logs a request/comment for a malware job.
+    enterTH(job_id, trailHash):
+        Updates a malware record with trail hash and status.
+    getUIDS(job_id):
+        Retrieves all user IDs associated with a given job ID.
+    getEmail(user_ids):
+        Retrieves email addresses for a list of user IDs.
+    getUserName(user_id):
+        Retrieves usernames for a given user ID.
+
+Classes:
+    None defined in this file.
+
+Usage:
+    Import this module to handle database operations and push messages 
+    to RabbitMQ for malware job management.
+
+Author:
+    Allan Pais
+"""
+
+
 from app_config import *
 from imports import *
 load_dotenv()
